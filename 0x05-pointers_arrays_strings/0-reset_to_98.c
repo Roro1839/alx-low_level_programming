@@ -1,14 +1,17 @@
 #include "main.h"
+
+
 /**
  * reset_to_98 - change the value of an integer to 98
  *
  * @n: int pointer
  *
- * Return:Nothing
+ * Return: Nothing
  */
 
 
-void reset_to_98 (int  *n)
+
+void reset_to_98(int *n)
 {
-	*98;
+	*n = 98;
 }
