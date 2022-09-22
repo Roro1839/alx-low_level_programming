@@ -1,71 +1,47 @@
 #include "main.h"
 
 /**
- * infinite_add - add two large number
+ *infinite_add - add two numbers.
  *
- * @n1: char pointer
- * @n2: char pointer
- * @r: char pointer
- * @size_r: int
- *
- * Return: char pointer
+ *@n1: first number.
+ *@n2: second number.
+ *@r: result.
+ *@size_r: result size.
+ *Return: the addition of n1 and n2.
  */
 
 char *infinite_add(char *n1, char *n2, char *r, int size_r)
 {
-	int i = 0;
-	int j = 0;
-	int count = 0;
-	int digit = 0;
-	unsigned int digitval;
-	unsigned int value1 = 0;
-	unsigned int value2 = 0;
-	unsigned int value3 = 0;
-	char *p = r;
+int add = 0, len1, len2, i, j;
 
-	while (n1[i + 1])
-	{
-		n1++;
-		i++;
-	}
-
-	while (i)
-	{
-		value1 += n1[i] - '0';
-		i--;
-	}
-
-	while (n2[j + 1])
-	{
-		n2++;
-		j++;
-	}
-
-	while (j)
-	{
-		value2 += n2[j - '0'];
-		j--;
-	}
-
-	value3 = value1 + value2;
-	digitval = value3;
-
-	while (digitval / 10)
-	{
-		count += 1;
-		digitval /= 10;
-	}
-
-	count += 1;
-
-	if (count > size_r)
-		return (0);
-	for (; count; count--)
-	{
-		digit = (value3 % 10);
-		value3 = (value3 - digit);
-		r[count] = digit + '0';
-	}
-
-	return (p);
+for (len1 = 0; n1[len1]; len1++)
+;
+for (len2 = 0; n2[len2]; len2++)
+;
+if (len1 > size_r || len2 > size_r)
+return (0);
+len1--;
+len2--;
+size_r--;
+for (i = 0; i < size_r; i++, len1--, len2--)
+{
+if (len1 >= 0)
+add += n1[len1] - '0';
+if (len2 >= 0)
+add += n2[len2] - '0';
+if (len1 < 0 && len2 < 0 && add == 0)
+break;
+r[i] = add % 10 + '0';
+add /= 10;
+}
+r[i] = '\0';
+if (len1 >= 0 || len2 >= 0 || add)
+return (0);
+for (i--, j = 0; i > j; i--, j++)
+{
+add = r[i];
+r[i] = r[j];
+r[j] = add;
+}
+return (r);
 }
