@@ -15,3 +15,28 @@ hash_table_t *hash_table_create(unsigned long size)
 
 	if (size <= 0)
 		return (NULL);
+
+	map = malloc(sizeof(*map));
+
+	if (!map)
+	{
+		free(map);
+		map = NULL;
+		return (map);
+	}
+
+	map->size = size;
+	map->array = malloc(sizeof(map->array) * map->size);
+
+	if (!(map->array))
+	{
+		free(map->array);
+		map->array = NULL;
+		return (NULL);
+	}
+
+	while (i < size)
+		map->array[i++] = NULL;
+
+	return (map);
+}
